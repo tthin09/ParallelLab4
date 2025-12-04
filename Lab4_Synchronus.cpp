@@ -658,7 +658,7 @@ int main(int argc, char** argv){
         // Reduce to get report, Gather to get 1 iter temp
         
         MPI_Reduce(&local_peak_temp,&peak_temp,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
-        MPI_Reduce(&local_cont_area,&cont_area,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
+        MPI_Reduce(&local_cont_area,&cont_area,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
         if(world_rank==0){
             std::cout<<"HEAT DIFFUSION REPORT: "<<peak_temp<<std::endl;
             std::cout<<"RADI DIFFUSION REPORT: "<<cont_area<<std::endl;

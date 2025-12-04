@@ -585,7 +585,7 @@ int main(int argc, char** argv){
     }
     // Init report_req
     MPI_Ireduce(&local_peak_temp,&peak_temp,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD,&report_req[0]);
-    MPI_Ireduce(&local_cont_area,&cont_area,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD,&report_req[1]);
+    MPI_Ireduce(&local_cont_area,&cont_area,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD,&report_req[1]);
     MPI_Ibcast(&done,1,MPI_C_BOOL,0,MPI_COMM_WORLD,&stop_sig);
     if(world_rank==0){
         MPI_Waitall(2,report_req,MPI_STATUS_IGNORE);
@@ -681,7 +681,7 @@ int main(int argc, char** argv){
         
         // Reduce to get report
         MPI_Ireduce(&local_peak_temp,&peak_temp,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD,&report_req[0]);
-        MPI_Ireduce(&local_cont_area,&cont_area,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD,&report_req[1]);
+        MPI_Ireduce(&local_cont_area,&cont_area,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD,&report_req[1]);
         if(world_rank==0){
             MPI_Waitall(2,report_req,MPI_STATUS_IGNORE);
             std::cout<<"HEAT DIFFUSION REPORT: "<<peak_temp<<std::endl;
